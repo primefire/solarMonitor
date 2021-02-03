@@ -25,7 +25,7 @@ export default class DatabaseConnection {
     }
     
     public async connectToDatabase(): Promise<void> {
-		await this.tryToEstablishAConnectionOrInterruptIfNotSuccessful();
+		  await this.tryToEstablishAConnectionOrInterruptIfNotSuccessful();
     }
     
     private async tryToEstablishAConnectionOrInterruptIfNotSuccessful(): Promise<void> {

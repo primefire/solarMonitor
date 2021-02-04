@@ -18,10 +18,11 @@ export default class EnergyUpdateHandler {
 	}
 
 	private scheduleCronJobForEveryHour(): void {
-		cron.schedule('0 * * * *', this.saveLatestReadingWithCleanTimestampInDatabaseIfAvailable);
+		cron.schedule('* * * * *', this.saveLatestReadingWithCleanTimestampInDatabaseIfAvailable);
 	}
 
 	private saveLatestReadingWithCleanTimestampInDatabaseIfAvailable(): void {
+		console.log('trying');
 		if (this.latestReading) {
 			let reading = this.latestReading;
 			reading.timestamp = this.getCurrentHourTimestamp();
@@ -32,6 +33,7 @@ export default class EnergyUpdateHandler {
 				exported: reading.energyExported
 			});
 			databaseModel.save();
+			console.log('saved');
 		}
 	}
 
@@ -39,7 +41,7 @@ export default class EnergyUpdateHandler {
 		let timestamp = new Date();
 		timestamp.setUTCMilliseconds(0);
 		timestamp.setUTCSeconds(0);
-		timestamp.setUTCMinutes(0);
+		//timestamp.setUTCMinutes(0);
 		return timestamp;
 	}
 
